@@ -4,7 +4,7 @@ const path = require('path');
 const expressValidator = require('express-validator');
 
 const mongojs = require('mongojs');
-const db = mongojs('users');
+const db = mongojs('librarySystem');
 
 const app = express();
 
@@ -71,21 +71,38 @@ app.post('/librarian', (req, res) => {
 		let user = req.body.username;
 		let pass = req.body.password;
 		let message = "";
+		let userId = null;
 	
-		db.customers.find(function (err, docs) {
+		db.admin.find(function (err, docs) {
 			for(let i=0; i<docs.length; i++) {
-				if (user === docs[i].username) {
-					if (pass === docs[i].password) {
-						message = "Success";
+				// Admin user
+				if (docs[i].id === "0") {
+					if (user === docs[i].username) {
+						if (pass === docs[i].password) {
+							message = "admin";
+							break;
+						}else {
+							message = "Unsuccessful";
+						}
 					}else {
-						message = "Unsuccessful";
+						message = "User not found";
 					}
-				}else {
-					message = "User not found";
+				// Customer user
+				}else if (docs[i].id === "1") {
+					if (user === docs[i].username) {
+						if (pass === docs[i].password) {
+							message = "customer";
+							break;
+						}else {
+							message = "Unsuccessful";
+						}
+					}else {
+						message = "User not found";
+					}
 				}
 			}
 		
-			if (message === "Success") {
+			if (message === "admin") {
 				// Book (POST)
 				app.post('/librarian/add', (req, res) => {
 					// Express validator for form
@@ -102,10 +119,10 @@ app.post('/librarian', (req, res) => {
 						let a = req.body.author;
 						db.books.insert({'Title' : t, 'Author' : a});
 						db.books.find(function (err, docs) {
-						res.render('librarian', {
-							titles: docs
+							res.render('librarian', {
+								titles: docs
+							});
 						});
-					});
 					}
 				});
 
@@ -114,6 +131,8 @@ app.post('/librarian', (req, res) => {
 						titles: docs
 					});
 				});
+			}else if (message === "customer") {
+				res.send("Customer");
 			}else if (message === "Unsuccessful") {
 				res.render('login', {
 					message: message

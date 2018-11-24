@@ -1,40 +1,22 @@
-<html>
-	<head>
-		<style>
-			*, *::after, *::before {
-				margin: 0;
-				padding: 0;
-				font-family: adriane, Georgia, serif;
-			}
-			h2 {
-				padding: 10px;
-				border-bottom: 1px solid rgba(0,0,0,.2);
-			}
-			form {
-				float: right;
-				padding: 10px;
-			}
-			ul {
-				float: left;
-				padding: 10px;
-			}
-			li {
-				display: inline-block;
-			}
-		</style>
-	</head>
-</html>
+<% include partials/header %>
 
-<h2>Book Catalogue</h2>
-<form method="POST" action="/librarian/add">
-	<label>Title</label><br />
-	<input type="text" name="title"><br /><br />
-	<label>Author</label><br />
-	<input type="text" name="author"><br /><br />
-	<input type="submit">
-</form>
-<ul>
-	<% titles.forEach(function(title) { %>
-		<li><strong><%= title.Title %></strong> - <%= title.Author %></li><br />
-	<% }); %>
-</ul>
+<header>
+	<h2>Administration</h2>
+</header>
+
+<books-section>
+	<form method="POST" action="/librarian/add">
+		<label>Title</label><br />
+		<input type="text" name="title"><br /><br />
+		<label>Author</label><br />
+		<input type="text" name="author"><br /><br />
+		<input type="submit">
+	</form>
+	<ul id="book-list">
+		<% titles.forEach(function(title) { %>
+			<li><strong><%= title.Title %></strong> - <%= title.Author %></li><br />
+		<% }); %>
+	</ul>
+</books-section>
+
+<% include partials/footer %>
