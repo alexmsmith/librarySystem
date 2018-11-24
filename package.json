@@ -1,0 +1,22 @@
+{
+  "name": "librarysystem",
+  "version": "1.0.0",
+  "description": "Library System",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "\u0016https://github.com/alexmsmith/librarySystem"
+  },
+  "author": "Alexander Smith",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-validator": "^5.3.0",
+    "mongojs": "^2.6.0",
+    "node-localStorage": "0.0.1"
+  }
+}

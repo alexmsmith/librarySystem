@@ -1,0 +1,13 @@
+<form method="POST" action="/">
+	<label>Title</label><br />
+	<input type="text" name="title"><br /><br />
+	<label>Author</label><br />
+	<input type="text" name="author"><br /><br />
+	<input type="submit">
+</form>
+
+<ul>
+	<% titles.forEach(function(title) { %>
+		<li><%= title.Title %> - <%= title.Author %></li>
+	<% }); %>
+</ul>

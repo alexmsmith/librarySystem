@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Login</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/css/dist/base.css">
+	</head>
+	<body>
+		<header>
+			<img src='/img/book.jpg'>
+			<h1>Library System</h1>
+		</header>
+		<% if (errors) { %>
+			<ul>
+				<% errors.forEach(function(err) { %>
+					<li><%= err.msg %></li>
+				<% }); %>
+			</ul>
+		<% } %>
+		<h3><%= message %></h3>
+		<login-section>
+			<div id="login-container">
+				<div id="btns">
+					<button id="Librarian" onclick="librarian(this.id)">Librarian</button>&nbsp;&nbsp;&nbsp;
+					<button id="User" onclick="user(this.id)">User</button>
+				</div>
+			</div>
+		</login-section>
+		
+		<script src="/js/account.js"></script>
+	</body>
+</html>
