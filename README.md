@@ -1,2 +1,2 @@
 # librarySystem
-Library System
+Library System based on the CRUD functionality
